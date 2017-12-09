@@ -19,17 +19,30 @@
 	Robot rob = new Robot("mini");
 
 	/*  Make the Robot move around the screen when the arrow keys are pressed... */
-	private void moveRobot(int keyPressed) {
+	private void moveRobot(int keyPressed) throws InterruptedException {
 	    // 0. Print out the keyPressed variable and write down the numbers for each arrow key
-
+System.out.println(keyPressed);
 	    // 1. If the up arrow is pressed, move the Robot up the screen.
-
+if (keyPressed == 38) {
+	rob.setAngle(0);
+	rob.microMove(5);
+}
 	    // 2. If the down arrow is pressed, move the Robot down.
+if (keyPressed == 40) {
+	rob.setAngle(180);
+	rob.microMove(5);
+}
 
 	    // 3. If the left arrow is pressed, make the Robot go left. Hint: Make sure to end with the Robot facing UP.
-	    
+	    if (keyPressed == 37) {
+	    	rob.setAngle(270);
+	    	rob.microMove(5);
+	    }
 	    // 4. If right is pressed, move the Robot right.
-	    
+	    if (keyPressed == 39) {
+	    	rob.setAngle(90);
+	    	rob.microMove(5);
+	    }
 	    // 5. Then move the Robot to RD-2D for a surprise! 
 	}
 
@@ -55,7 +68,12 @@
 
 	public boolean dispatchKeyEvent(KeyEvent e) {
 	    if (e.getID() == KeyEvent.KEY_PRESSED) {
-	        moveRobot(e.getKeyCode());
+	        try {
+				moveRobot(e.getKeyCode());
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        try {
 	            checkIfR2D2Found();
 	        } catch (Exception exception) {
